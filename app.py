@@ -22,10 +22,11 @@ api_key = os.getenv("API_KEY")
 
 # Stores locations from api calls
 locations = []
-
+# Default bus line
+busLine = "17"
 # Fetching data
 def fetch_data():
-    global locations
+    global locations, busLine
     api_url = f"https://data.bus-data.dft.gov.uk/api/v1/datafeed/708/?api_key={api_key}"
 
     response = requests.get(api_url)
@@ -47,8 +48,10 @@ def fetch_data():
     # Clear list before populating
     locations = []
 
+
+
     # Get all the 699 bus
-    for line in root.findall(".//siri:VehicleActivity/siri:MonitoredVehicleJourney/[siri:LineRef='13']",ns):
+    for line in root.findall(f".//siri:VehicleActivity/siri:MonitoredVehicleJourney/[siri:LineRef='{busLine}']",ns):
         # get their locations
         long = line.find('siri:VehicleLocation/siri:Longitude', ns)
         lat = line.find('siri:VehicleLocation/siri:Latitude', ns)
@@ -73,6 +76,12 @@ def get_locations():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@socketio.on('line')
+def handle_user_line(data):
+    global busLine
+    busLine = data.get('line', "17")
+    print(data['line'])
 
 
     

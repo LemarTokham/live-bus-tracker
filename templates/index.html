@@ -14,6 +14,10 @@
     <title>Document</title>
 </head>
 <body>
+    <form id="form">
+        <label for="text">Bus Service: </label>
+        <input type="text" id="text" autofocus>
+    </form>
     <div id="map">hi</div>
      <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -32,6 +36,16 @@
 
         // Setup socket
         var socket = io();
+
+        // Get user input and send to backend
+        const busForm = document.getElementById('form');
+        busForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Stop page from refreshing when form is submitted
+            const textField = document.getElementById('text');
+            socket.emit('line', {line: textField.value})
+            textField.value = '';
+
+        })
 
         // Listen out for data
         socket.on('bus locations', function(locationData){
