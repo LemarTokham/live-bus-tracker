@@ -1,4 +1,4 @@
-# Bus tracking web app (Flask + WebSockets + Leaflet)
+# Bus tracking web app (Flask + WebSockets + Leaflet (conversion to google maps api pending))
 
 A real-time web app that fetches live bus data from the liverpool area, option to add custom bus route is live!
 
@@ -17,3 +17,6 @@ python app.py
 To open, visit http://localhost:3000 on your machine
 
 As you first load up the app, give it 10 seconds for the first set of bus data to come in.
+
+## Planned Features
+Live bus timings from specified bus stops
