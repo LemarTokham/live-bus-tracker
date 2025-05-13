@@ -24,42 +24,9 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        var map = L.map('map').setView([53.4218, -2.9496], 14);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-        var busMarkerLayer = L.layerGroup().addTo(map);
-
-        // Setup socket
-        var socket = io();
-
-        // Get user input and send to backend
-        const busForm = document.getElementById('form');
-        busForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Stop page from refreshing when form is submitted
-            const textField = document.getElementById('text');
-            socket.emit('line', {line: textField.value})
-            textField.value = '';
-
-        })
-
-        // Listen out for data
-        socket.on('bus locations', function(locationData){
-            console.log(locationData) // Handling the retrieved data
-
-            busMarkerLayer.clearLayers();
-   
-            locationData.forEach(bus => {
-                var lat = bus.lat;
-                var long = bus.long;
-                var busMarker = L.marker([lat, long]).addTo(busMarkerLayer);
-            });
-        });
-        
     </script>
 </body>
 </html>
