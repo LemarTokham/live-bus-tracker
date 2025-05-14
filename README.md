@@ -20,3 +20,7 @@ As you first load up the app, give it 10 seconds for the first set of bus data t
 
 ## Planned Features
 Live bus timings from specified bus stops
+
+### Next steps
+Creating restful APIs for the front end to consume
+Conversion to google maps api for further features such as satellite imagery
