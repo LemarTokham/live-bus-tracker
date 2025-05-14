@@ -33,3 +33,5 @@ socket.on('bus locations', function(locationData){
         var busMarker = L.marker([lat, long]).addTo(busMarkerLayer);
     });
 });
+
+
