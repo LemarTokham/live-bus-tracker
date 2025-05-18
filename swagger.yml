@@ -1,0 +1,40 @@
+# swagger.yml
+
+openapi: 3.0.0
+info:
+  title: "Flask REST API"
+  description: "An api containing bus locations"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    Service:
+      type: "object"
+        
+
+
+paths:
+ /location:
+  get:
+    operationId: "location.fetch_data"
+    summary: "Getting bus data"
+    responses:
+      "200":
+        description: "Successfully fetched locations"
+  post:
+    operationId: "location.request"
+    summary: "Requesting a service"
+    requestBody:
+        description: "Service to request"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "location"
+              $ref: "#/components/schemas/Service"
+    responses:
+      "200":
+        description: "Successfully sent a request"
